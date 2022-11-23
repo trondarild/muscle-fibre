@@ -9,12 +9,21 @@ class MuscleFibre {
   float x = 0.f;
   float y = 0.f;
   float l = 0;
+  LimitedLeakyIntegrator integrator = new LimitedLeakyIntegrator(
+   1,1, 
+   0.8, 0.85, 
+   0.9,  0.1, 1.f);
 
   float length() {
     return l;
   }
 
-  void excite(float[] a){}
+  void excite(float[] a){
+    // integrate inputs
+    float[][] exc = arrayToMatrix(a);
+    integrator.setInput(exc);
+    
+  }
   void draw(){
     fill(200);
     //circle(width/2, height/2, 100);
@@ -23,6 +32,8 @@ class MuscleFibre {
   }
   
   void tick(){
+    integrator.tick();
+    contraction = integrator.getOutput()[0][0];
     l = minlength + (maxlength-minlength)*(1-contraction);
   
   }
