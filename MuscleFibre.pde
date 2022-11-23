@@ -8,16 +8,22 @@ class MuscleFibre {
   float w = 20.f;
   float x = 0.f;
   float y = 0.f;
+  float l = 0;
+
+  float length() {
+    return l;
+  }
 
   void excite(float[] a){}
   void draw(){
     fill(200);
     //circle(width/2, height/2, 100);
-    float l = minlength + (maxlength-minlength)*(1-contraction);
+    
     rect(x, y, l, w);
   }
   
   void tick(){
+    l = minlength + (maxlength-minlength)*(1-contraction);
   
   }
 }
