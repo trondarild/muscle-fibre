@@ -2,13 +2,14 @@
 */
 class MuscleFibre {
   
-  float minlength = 25.f;
+  float minlength = 25.f; // length at max contraction 
   float maxlength = 50.f;
   float contraction = 0.f;
   float w = 20.f;
   float x = 0.f;
   float y = 0.f;
   float l = 0;
+  // row, col, growth, decay, accumulate, decaythreshold, limit
   LimitedLeakyIntegrator integrator = new LimitedLeakyIntegrator(
    1,1, 
    0.8, 0.85, 
@@ -29,6 +30,8 @@ class MuscleFibre {
     //circle(width/2, height/2, 100);
     
     rect(x, y, l, w);
+    fill(0);
+    circle(x+l, w*0.5, w*0.4); // mark fibre end point
   }
   
   void tick(){
